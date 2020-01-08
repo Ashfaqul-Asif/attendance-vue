@@ -22,7 +22,7 @@ const routes = [
   {
     path:"/users",
     name:"users",
-    component:loadView("Users")
+    component:loadView("users")
 
   }
 ];

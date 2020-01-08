@@ -34,7 +34,7 @@
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
           <v-list-item-content>
-            <v-list-item-title v-on:click="method($event,item)">{{ item.title }}</v-list-item-title>
+            <v-list-item-title v-on:click="onclickItem(item.route)">{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -43,17 +43,25 @@
 </template>
 
 <script>
+//import router from "../router/index"
 export default {
     data(){
         return{
             drawer: true,
         items: [
-          { title: 'Home', icon: 'mdi-home-city', route:'' },
+          { title: 'Home', icon: 'mdi-home-city',  },
           { title: 'My Account', icon: 'mdi-account' },
-          { title: 'Users', icon: 'mdi-account-group-outline' },
+          { title: 'Users', icon: 'mdi-account-group-outline',route:'/users' },
         ],
         mini: true,
         }
+    },
+
+    methods:{
+      onclickItem( route){
+        //router.push(route)
+        this.$router.push(route)
+      }
     }
     
 }
