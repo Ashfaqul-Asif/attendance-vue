@@ -24,7 +24,9 @@ const routes = [
     name:"users",
     component:loadView("users")
 
-  }
+  },
+  
+  
 ];
 
 const router = new VueRouter({

@@ -5,9 +5,6 @@ const state={
              name:'Admin',
              email:'admin@gmail.com',
              password:'a'
-            
- 
- 
           }
         ]
        
