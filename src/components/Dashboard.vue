@@ -1,6 +1,6 @@
-<template>
+<template >
   
-  <v-card class="card">
+  <v-card v-if="signinedIn" class="card">
     <v-navigation-drawer
       v-model="drawer"
       :mini-variant.sync="mini"
@@ -44,6 +44,7 @@
 
 <script>
 //import router from "../router/index"
+import {mapGetters} from 'vuex'
 export default {
     data(){
         return{
@@ -56,6 +57,14 @@ export default {
         mini: true,
         }
     },
+    computed: {
+    ...mapGetters(['signinedIn']),
+  
+  },
+  created(){
+    !this.signinedIn && this.$router.push("/")
+  },
+
 
     methods:{
       onclickItem( route){

@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div >
+    {{highestid}}
     <v-data-table
       :headers="headers"
       :items="tabledata"
@@ -62,7 +63,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false"
+            <v-btn color="blue darken-1" text @click=" dialog = false"
               >Close</v-btn
             >
             <v-btn color="blue darken-1" text @click="onSaveitem(item)"
@@ -84,8 +85,8 @@
       class="mx-0"
       justify="space-around"
       >
-      <v-btn small color="light-green ">Confirm</v-btn>
-      <v-btn small color="blue darken-1">Cancel</v-btn>
+      <v-btn small color="light-green " @click="deleteConfirmed">Confirm</v-btn>
+      <v-btn small color="blue darken-1" @click="dialogdelete= false">Cancel</v-btn>
       </v-row>
       </v-card-actions>
       </v-card>
@@ -129,17 +130,22 @@ export default {
       ],
       editedIndex: -1,
       editedItem: null,
+      onDeleteItem:{}
     };
   },
+  created(){
+    !this.signinedIn && this.$router.push("/")
+  },
   computed: {
-    ...mapGetters("users", ["tabledata"])
+    ...mapGetters(['signinedIn']),
+    ...mapGetters("users", ["tabledata","highestid"])
   },
   methods: {
     onSaveitem(item) {
       let obj = {
         name: this.name,
         email: this.email,
-        id: 0
+        id: this.highestid+1,
       };
       this.addPeople(obj);
       this.dialog = false;
@@ -159,12 +165,24 @@ export default {
       this.dialog = true;
     },
     deleteItem(item) {
-      const index = this.tabledata.indexOf(item);
+      this.onDeleteItem=item;
        this.dialogdelete = true;
-        this.tabledata.splice(index, 1);
-    },
 
-    ...mapMutations("users", ["addPeople"])
+    },
+    deleteConfirmed(){
+      this.dialogdelete=false;
+      this.deletepeople(this.onDeleteItem)
+    },
+    
+   /*  close () {
+        this.dialog = false
+        setTimeout(() => {
+          this.editedItem = Object.assign({}, this.defaultItem)
+          this.editedIndex = -1
+        }, 300)
+      }, */
+
+    ...mapMutations("users", ["addPeople","deletepeople"])
   }
 };
 </script>

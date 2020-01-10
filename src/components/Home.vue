@@ -1,6 +1,6 @@
 <template>
   <v-container fill-height>
-    <v-card class="ml-auto mr-auto card">
+    <v-card class="mx-auto  card">
       <v-card-text>
         <h2 class="login">Login</h2>
 
@@ -41,7 +41,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapMutations } from "vuex";
 import { CLIENT_RENEG_LIMIT } from "tls";
 export default {
   data: () => ({
@@ -64,6 +64,7 @@ export default {
     ...mapGetters(["allusers"])
   },
   methods: {
+    ...mapMutations(["setState"]),
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
@@ -82,6 +83,7 @@ export default {
         );
         if (u) {
           this.$router.replace({ name: "about" });
+          this.setState({signinedIn:true})
           console.log("login Successfull");
         } else {
           console.log("The username and / or password is incorrect");

@@ -6,18 +6,24 @@ const state={
              email:'admin@gmail.com',
              password:'a'
           }
-        ]
+        ],
+        signinedIn:false
        
 
 };
 const getters={
-  allusers:(state)=>state.Users
+  allusers:(state)=>state.Users,
+  signinedIn:state=>state.signinedIn
 };
 const action={
 
 };
 const mutations={
-
+  setState:(state,payload) => {
+    /** {signedIn:true} */
+    Object.keys(payload).forEach( key => state[key] = payload[key])
+  },
+  
 }
 
 export default {
