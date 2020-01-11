@@ -1,6 +1,6 @@
 <template>
   <v-container fill-height>
-    <v-card class="mx-auto  card">
+    <v-card class="mx-auto my-auto  card">
       <v-card-text>
         <h2 class="login">Login</h2>
 
@@ -54,7 +54,7 @@ export default {
     ],
     password: "",
     passwordRules: [
-      v => !!v || "Password is required", 
+      v => !!v || "Password is required"
       /* v => (v && v.length > 5) || "Password must be greater than 5 characters" */
     ],
     select: null,
@@ -64,7 +64,8 @@ export default {
     ...mapGetters(["allusers"])
   },
   methods: {
-    ...mapMutations(["setState"]),
+    ...mapMutations(["setState", " setAuthentication"]),
+
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
@@ -82,24 +83,13 @@ export default {
           a => a.email === this.email && a.password === this.password
         );
         if (u) {
-          this.$router.replace({ name: "about" });
-          this.setState({signinedIn:true})
+          this.$store.commit("authenticate/setAuthentication", true);
+          this.$router.push({ name: "about" });
           console.log("login Successfull");
         } else {
           console.log("The username and / or password is incorrect");
         }
       }
-      /*  if(this.email != "" && this.password != "") {
-                    if(this.email == ) {
-                        this.$emit("authenticated", true);
-                        this.$router.replace({ name: "about" });
-                    } else {
-                        console.log("The username and / or password is incorrect");
-                    }
-                } else {
-                    console.log("A username and password must be present");
-                }
-    } */
     }
   }
 };
@@ -112,6 +102,5 @@ export default {
 .card {
   min-height: 50vh;
   min-width: 90vh;
-  
 }
 </style>

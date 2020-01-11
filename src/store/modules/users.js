@@ -1,4 +1,5 @@
 const state = {
+  
   people: [
     {
       name: "Frozen Yogurt",
@@ -8,7 +9,7 @@ const state = {
     {
       name: "Ice cream sandwich",
       email: 237,
-      id: 2
+      id: 9
     },
     {
       name: "Eclair",
@@ -43,13 +44,13 @@ const state = {
     {
       name: "KitKat",
       email: 518,
-      id: 9
+      id: 2
     }
   ]
 };
 const getters = {
   tabledata: state => state.people,
-  highestid:state => ((state.people.map(i=>i.id)).sort())[state.people.length-1]
+  
 };
 const action = {};
 const mutations = {
@@ -61,7 +62,14 @@ const mutations = {
     const index = state.people.indexOf(item);
        
     state.people.splice(index, 1);
+  },
+  updatePeople(state,item){
+    let u=state.people.findIndex(u=>u.id===item.id)
+    state.people[u]=item
+    
   }
+  
+
 };
 
 export default {

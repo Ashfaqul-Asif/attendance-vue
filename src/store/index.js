@@ -5,10 +5,13 @@ Vue.use(Vuex)
 
 import home from "./modules/home"
 import users from "./modules/users"
+import  authenticate  from "./modules/authenticate";
+
+
 export default new Vuex.Store({
   
   plugins: [createPersistedState()],
   modules: {
-    home,users
+    home,users,authenticate
   }
 })

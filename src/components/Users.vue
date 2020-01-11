@@ -1,6 +1,6 @@
 <template>
   <div >
-    {{highestid}}
+   
     <v-data-table
       :headers="headers"
       :items="tabledata"
@@ -66,7 +66,7 @@
             <v-btn color="blue darken-1" text @click=" dialog = false"
               >Close</v-btn
             >
-            <v-btn color="blue darken-1" text @click="onSaveitem(item)"
+            <v-btn color="blue darken-1" text @click="onSaveitem"
               >Save</v-btn
             >
           </v-card-actions>
@@ -97,6 +97,7 @@
 
 <script>
 import { mapGetters, mapMutations } from "vuex";
+import GLOBAL from "../mixin/GLOBAL"
 export default {
   data() {
     return {
@@ -128,26 +129,35 @@ export default {
         v => !!v || "Password is required",
         v => (v && v.length > 5) || "Password must be greater than 5 characters"
       ],
-      editedIndex: -1,
+   
       editedItem: null,
       onDeleteItem:{}
     };
   },
-  created(){
-    !this.signinedIn && this.$router.push("/")
-  },
+  mixins:[GLOBAL],
+ 
   computed: {
-    ...mapGetters(['signinedIn']),
-    ...mapGetters("users", ["tabledata","highestid"])
+    
+    ...mapGetters("users", ["tabledata"])
   },
   methods: {
-    onSaveitem(item) {
+
+    onSaveitem() {
       let obj = {
         name: this.name,
         email: this.email,
         id: this.highestid+1,
       };
-      this.addPeople(obj);
+      if (this.editedItem === null) {
+         this.addPeople(obj);
+      }
+      else{
+        obj.id=this.editedItem.id
+        this.updatePeople(obj)
+        this.$forceUpdate()
+      }
+      
+     
       this.dialog = false;
       this.name = "";
       this.email = "";
@@ -182,7 +192,7 @@ export default {
         }, 300)
       }, */
 
-    ...mapMutations("users", ["addPeople","deletepeople"])
+    ...mapMutations("users", ["addPeople","deletepeople","updatePeople"])
   }
 };
 </script>
