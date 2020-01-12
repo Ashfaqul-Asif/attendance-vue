@@ -1,24 +1,28 @@
 <template>
   <v-container fill-height>
     <v-card class="mx-auto my-auto  card">
-      <v-card-text>
+      <v-card-text class="blue white--text">
         <h2 class="login">Login</h2>
-
-        <v-form ref="form" v-model="valid" lazy-validation>
+      </v-card-text>
+        <v-divider></v-divider>
+      <v-container>
+          <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
             v-model="email"
             :rules="emailRules"
+            prepend-icon="email"
             label="E-mail"
             required
           ></v-text-field>
           <v-text-field
             v-model="password"
             :rules="passwordRules"
+              prepend-icon="lock"
             label="Password"
             required
             type="password"
           ></v-text-field>
-
+        
           <v-checkbox
             v-model="checkbox"
             :rules="[v => !!v || 'You must agree to continue!']"
@@ -27,7 +31,7 @@
           ></v-checkbox>
           <v-hover>
             <v-btn
-              color="success"
+              color="blue white--text"
               class=" button mr-4 float-right"
               v-on:click="login()"
             >
@@ -35,7 +39,7 @@
             </v-btn>
           </v-hover>
         </v-form>
-      </v-card-text>
+      </v-container>
     </v-card>
   </v-container>
 </template>
@@ -84,7 +88,7 @@ export default {
         );
         if (u) {
           this.$store.commit("authenticate/setAuthentication", true);
-          this.$router.push({ name: "about" });
+          this.$router.push({ name: "dashboard" });
           console.log("login Successfull");
         } else {
           console.log("The username and / or password is incorrect");

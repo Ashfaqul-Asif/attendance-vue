@@ -2,6 +2,7 @@
   <div >
    
     <v-data-table
+      :loading="loadingItem"
       :headers="headers"
       :items="tabledata"
       :items-per-page="5"
@@ -67,6 +68,7 @@
               >Close</v-btn
             >
             <v-btn color="blue darken-1" text @click="onSaveitem"
+              :rules="passwordRules"
               >Save</v-btn
             >
           </v-card-actions>
@@ -131,7 +133,8 @@ export default {
       ],
    
       editedItem: null,
-      onDeleteItem:{}
+      onDeleteItem:{},
+      loadingItem:false,
     };
   },
   mixins:[GLOBAL],
@@ -152,9 +155,11 @@ export default {
          this.addPeople(obj);
       }
       else{
+        this.loadingItem=true
         obj.id=this.editedItem.id
         this.updatePeople(obj)
         this.$forceUpdate()
+        this.loadingItem=false
       }
       
      
