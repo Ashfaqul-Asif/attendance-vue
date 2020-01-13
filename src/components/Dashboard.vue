@@ -68,11 +68,11 @@ export default {
   },
 
   methods: {
-    ...mapMutations("authenticate", ["setAuthentication"]),
+    ...mapMutations("authenticate", ["resetState"]),
     onclickItem(item) {
       //router.push(route)
 
-      item.title === "Logout" && this.setAuthentication(false);
+      item.title === "Logout" && this.resetState(false);
 
       this.$router.push({path:item.route});
       console.log(item.route);

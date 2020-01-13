@@ -1,12 +1,12 @@
 const state={
     
         authenticated: false,
-        currentUser:{}
+        currentUserID:null
 }
 
 const getters={
     getauthenticated:(state)=>state.authenticated,
-    getCurrentUser:(state)=>state.currentUser,
+    getcurrentUserID:(state)=>state.currentUserID,
 }
 
 const action={}
@@ -15,10 +15,13 @@ const mutations={
     setAuthentication(state, status) {
         state.authenticated = status;
     },
-    setCurrentUser(state,user){
-      state.currentUser=user
+    setcurrentUserID(state,userId){
+      state.currentUserID=userId
+    },
+    resetState:(state)=>{
+        state.authenticated=false;
+        state.currentUserID=null
     }
-
 }
 
 export default {

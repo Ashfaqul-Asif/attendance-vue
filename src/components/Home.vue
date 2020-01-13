@@ -69,7 +69,7 @@ export default {
   },
   methods: {
     ...mapMutations("users",["setState"]),
-    ...mapMutations("authenticate",["setAuthentication"]),
+    ...mapMutations("authenticate",["setAuthentication","setcurrentUserID"]),
 
     validate() {
       if (this.$refs.form.validate()) {
@@ -90,9 +90,9 @@ export default {
         console.log(u);
         if (u) {
           this.$store.commit("authenticate/setAuthentication", true);
-          this.$store.commit("authenticate/setCurrentUser",u.id)
+          this.setcurrentUserID(u.id)
           this.$router.push({ name: "dashboard" });
-          console.log("login Successfull");
+          console.log("login Successfull",u.id);
         } else {
           console.log("The username and / or password is incorrect");
           window.alert("The username and / or password is incorrect")

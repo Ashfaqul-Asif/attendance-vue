@@ -15,9 +15,8 @@
       <v-card-actions class="pb-4 pl-4 pt-4">
          <v-btn
          @click="setCheckedIn"
-         v-if="checkedAt === false || checkedOutAt !==false "
-         :disabled="checkedOutAt!==false"
-         
+         v-if="true/*checkedAt === false || checkedOutAt !==false*/"
+         :disabled="false /*checkedOutAt!==false*/"
          >
          <p>CheckIn</p>
          </v-btn>
@@ -41,17 +40,18 @@ import moment from 'moment';
 import { mapActions, mapGetters, mapMutations } from 'vuex';
 export default {
     methods:{
-      ...mapMutations("attendance",['setCheckedIn','setCheckedOut']),
+      ...mapActions("attendance",['setCheckedIn','setCheckedOut']),
     },
     computed:{
       ...mapGetters("attendance",['checkedAt','checkedOutAt','getdate']),
     },
     created(){
-      let date=new Date(this.getdate)
-      let currentdate=new Date()
-      if (date===currentdate) {
+      // let date=new Date(this.getdate)
+      // let currentdate=new Date()
+      // if (date===currentdate) {
         
-      }
+      // }
+      this.$store.dispatch("attendance/checkUsersCheckin")
     }
 }
 </script>
