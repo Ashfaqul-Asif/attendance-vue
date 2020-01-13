@@ -1,6 +1,6 @@
 <template>
   <v-layout wrap app>
-      <v-app-bar app class="elevation-2" color="success px-6" dark>
+      <v-app-bar app class="elevation-2" color="blue px-6" dark>
       <v-app-bar-nav-icon @click="drawerExpanded=!drawerExpanded"></v-app-bar-nav-icon>
       <v-toolbar-title>
         <span class="font-weight-light">Admin</span> Panel

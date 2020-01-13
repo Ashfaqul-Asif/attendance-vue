@@ -150,6 +150,7 @@ export default {
         name: this.name,
         email: this.email,
         id: this.highestid+1,
+        password:this.password
       };
       if (this.editedItem === null) {
          this.addPeople(obj);
@@ -197,7 +198,7 @@ export default {
         }, 300)
       }, */
 
-    ...mapMutations("users", ["addPeople","deletepeople","updatePeople"])
+    ...mapMutations("users", ["addPeople","deletepeople","updatePeople","addPassword"])
   }
 };
 </script>

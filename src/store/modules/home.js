@@ -21,7 +21,7 @@ const action={
 const mutations={
   setState:(state,payload) => {
     /** {signedIn:true} */
-    Object.keys(payload).forEach( key => state[key] = payload[key])
+   state.users=payload;
   },
   
 }

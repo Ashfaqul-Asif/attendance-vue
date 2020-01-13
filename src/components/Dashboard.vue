@@ -44,11 +44,11 @@ export default {
     return {
       isDrawer: false,
       items: [
-        { title: "Check-In", icon: "check_circle", route: "dashboard/checkin" },
+        { title: "Check-In", icon: "check_circle", route: "/dashboard/checkin" },
         {
           title: "Users",
           icon: "mdi-account-group-outline",
-          route: "dashboard/users"
+          route: "/dashboard/users"
         },
         { title: "Logout", icon: "exit_to_app", route: "/" }
       ],
@@ -74,7 +74,8 @@ export default {
 
       item.title === "Logout" && this.setAuthentication(false);
 
-      this.$router.push(item.route);
+      this.$router.push({path:item.route});
+      console.log(item.route);
     }
   }
 };

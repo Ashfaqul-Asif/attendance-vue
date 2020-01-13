@@ -65,10 +65,11 @@ export default {
     checkbox: false
   }),
   computed: {
-    ...mapGetters(["allusers"])
+    ...mapGetters("users",["allusers"])
   },
   methods: {
-    ...mapMutations(["setState", " setAuthentication"]),
+    ...mapMutations("users",["setState"]),
+    ...mapMutations("authenticate",["setAuthentication"]),
 
     validate() {
       if (this.$refs.form.validate()) {
@@ -86,12 +87,15 @@ export default {
         let u = this.allusers.find(
           a => a.email === this.email && a.password === this.password
         );
+        console.log(u);
         if (u) {
           this.$store.commit("authenticate/setAuthentication", true);
+          this.$store.commit("authenticate/setCurrentUser",u.id)
           this.$router.push({ name: "dashboard" });
           console.log("login Successfull");
         } else {
           console.log("The username and / or password is incorrect");
+          window.alert("The username and / or password is incorrect")
         }
       }
     }

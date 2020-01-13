@@ -1,55 +1,21 @@
 const state = {
-  
+  signinedIn:false,
   people: [
     {
-      name: "Frozen Yogurt",
-      email: 159,
-      id: 1
-    },
-    {
-      name: "Ice cream sandwich",
-      email: 237,
-      id: 9
-    },
-    {
-      name: "Eclair",
-      email: 262,
-      id: 3
-    },
-    {
-      name: "Cupcake",
-      email: 305,
-      id: 4
-    },
-    {
-      name: "Jelly bean",
-      email: 375,
-      id: 5
-    },
-    {
-      name: "Lollipop",
-      email: 392,
-      id: 6
-    },
-    {
-      name: "Honeycomb",
-      email: 408,
-      id: 7
-    },
-    {
-      name: "Donut",
-      email: 452,
-      id: 8
-    },
-    {
-      name: "KitKat",
-      email: 518,
-      id: 2
-    }
+      id:0,
+      name:'Admin',
+      email:'admin@gmail.com',
+      password:'12345'
+   },
+    
   ]
+  
 };
 const getters = {
   tabledata: state => state.people,
+  allusers:(state)=>state.people,
+  signinedIn:state=>state.signinedIn
+  
   
 };
 const action = {};
@@ -67,7 +33,15 @@ const mutations = {
     let u=state.people.findIndex(u=>u.id===item.id)
     state.people[u]=item
     
+  },
+  addPassword(state,pass){
+    state.people.password.push(pass)
+  },
+  setState:(state,payload) => {
+    /** {signedIn:true} */
+    state.people=payload;
   }
+  
   
 
 };
