@@ -5,7 +5,7 @@
         <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
       </v-list-item-avatar>
 
-      <v-list-item-title>John Leider</v-list-item-title>
+      <v-list-item-title></v-list-item-title>
 
       <v-btn icon @click.stop="mini = !mini">
         <v-icon>mdi-chevron-left</v-icon>
@@ -44,11 +44,20 @@ export default {
     return {
       isDrawer: false,
       items: [
-        { title: "Check-In", icon: "check_circle", route: "/dashboard/checkin" },
+        {
+          title: "Check-In",
+          icon: "check_circle",
+          route: "/dashboard/checkin"
+        },
         {
           title: "Users",
           icon: "mdi-account-group-outline",
           route: "/dashboard/users"
+        },
+        {
+          title:"Attendande",
+          icon:"spellcheck",
+          route:"/dashboard/attendance"
         },
         { title: "Logout", icon: "exit_to_app", route: "/" }
       ],
@@ -69,12 +78,14 @@ export default {
 
   methods: {
     ...mapMutations("authenticate", ["resetState"]),
+    ...mapMutations("attendance", ["resetUsersCheckin"]),
     onclickItem(item) {
       //router.push(route)
 
-      item.title === "Logout" && this.resetState(false);
+      item.title === "Logout" &&
+        (this.resetState(false), this.resetUsersCheckin());
 
-      this.$router.push({path:item.route});
+      this.$router.push({ path: item.route });
       console.log(item.route);
     }
   }

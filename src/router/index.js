@@ -5,6 +5,7 @@ const loadLayout = view => () => import(`@/views/${view}.vue`);
 const loadComponent = c => () => import(`@/components/${c}.vue`);
 import { mapMutuation } from "vuex";
 import store from "../store";
+import attendance from "../store/modules/attendance";
 
 Vue.use(VueRouter);
 
@@ -24,16 +25,17 @@ const routes = [
       children:[
         
           { path: 'users', name:"users",component: loadView("users") },
-          { path: 'checkin', name:"checkin",component: loadComponent("UsersCheckin") }
+          { path: 'checkin', name:"checkin",component: loadComponent("UsersCheckin") },
+          { path:'attendance',name:attendance,component:loadComponent("UserAttendance")}
         
       ]
   },
 
-/*   {
-    path: "/home",
-    name: "home",
-    component: loadView("users")
-  } */
+  {
+    path: "/test",
+    name: "test",
+    component: loadComponent("Test")
+  }
 ];
 
 const router = new VueRouter({
