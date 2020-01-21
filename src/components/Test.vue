@@ -1,38 +1,36 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="userAttendance"
-    :items-per-page="5"
-    class="elevation-1"
-  ></v-data-table>
+  <v-btn @click="location()">
+    <p>CheckIn</p>
+  </v-btn>
 </template>
 
 <script>
- import {mapGetters} from "vuex"
-  export default {
-    data () {
-      return {
-        headers: [
-          {
-            text: 'ID',
-            align: 'left',
-            sortable: false,
-            value: 'id',
-          },
-          { text: 'Checked in Time', value: 'checkedAt' },
-          { text: 'Checked out Time', value: 'checkedOutAt' },
-          { text: 'Date', value: 'date' },
-          
-        ],
-        
-      }
-    },
-    computed:{
-            ...mapGetters("attendance", ["userAttendance"])
+import { mapGetters } from "vuex";
+export default {
+  data() {
+    return {
+      
+    }
+  },
+  methods: {
+    location:function(){
+        if ('geolocation' in navigator) {
+           console.log('geolocation is available');
+           navigator.geolocation.getCurrentPosition(function(position){
+           let x=(position.coords.latitude);
+           console.log(x);
+           let y=(position.coords.longitude);
+           console.log(y);
+           })
+        }else{
+          console.log('geolocation is not available');
         }
-  }
+      }
+    
+  },
+ 
+};
 </script>
 
 <style>
-
 </style>
